@@ -171,5 +171,123 @@ namespace CapaModelo_Seguridad
 
             EjecutarComando(sSql);
         }
+
+        public DataTable MostrarFacultades()
+        {
+            try
+            {
+                Conexion cn = new Conexion();
+                using (OdbcConnection conn = cn.conexion())
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Facultades";
+
+                    OdbcDataAdapter da = new OdbcDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al cargar facultades: " + ex.Message);
+            }
+        }
+
+        // MÉTODO INSERTAR EMPLEADO
+        public void InsertarFacultades(string codigo_facultad, string nombre_facultad, string status_facultad)
+        {
+            try
+            {
+                Conexion cn = new Conexion();
+                using (OdbcConnection conn = cn.conexion())
+                {
+                    conn.Open();
+                    string query = "INSERT INTO Facultades (codigo_facultad, nombre_facultad, estatus_facultad) VALUES (?, ?, ?)";
+
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", codigo_facultad);
+                        cmd.Parameters.AddWithValue("@puesto", nombre_facultad);
+                        cmd.Parameters.AddWithValue("@departamento", status_facultad);
+
+                        cmd.ExecuteNonQuery();
+
+
+                       /* // Registrar en bitácora
+                        string detalles = $"Nuevo empleado: {nombre}, Puesto: {puesto}, Depto: {departamento}";
+                        RegistrarBitacora(usuario, "INSERT", codigoEmpleado, detalles);*/
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar facultad: " + ex.Message);
+            }
+        }
+
+        // MÉTODO EDITAR EMPLEADO
+        public void EditarEmpleado(string idEmpleado, string nombre, string puesto, string departamento, string usuario)
+        {
+            try
+            {
+                Conexion cn = new Conexion();
+                using (OdbcConnection conn = cn.conexion())
+                {
+                    conn.Open();
+                    string query = "UPDATE empleados SET nombre_completo = ?, puesto = ?, departamento = ? WHERE codigo_empleado = ?";
+
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@puesto", puesto);
+                        cmd.Parameters.AddWithValue("@departamento", departamento);
+                        cmd.Parameters.AddWithValue("@id", idEmpleado);
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Facultad: " + ex.Message);
+            }
+        }
+
+        // MÉTODO ELIMINAR EMPLEADO
+        public void EliminarEmpleado(string idEmpleado, string usuario)
+        {
+            try
+            {
+                // Primero obtener datos del empleado antes de eliminar
+                string nombreEmpleado = "";
+                Conexion cn = new Conexion();
+                using (OdbcConnection conn = cn.conexion())
+                {
+                    conn.Open();
+                    string querySelect = "SELECT nombre_completo FROM Facultades WHERE codigo_facultad = ?";
+                    using (OdbcCommand cmd = new OdbcCommand(querySelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idEmpleado);
+                        nombreEmpleado = cmd.ExecuteScalar()?.ToString();
+                    }
+
+                    // Ahora eliminar
+                    string queryDelete = "DELETE FROM Facultades WHERE codigo_facultad = ?";
+                    using (OdbcCommand cmd = new OdbcCommand(queryDelete, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idEmpleado);
+                        cmd.ExecuteNonQuery();
+
+                     
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar Facultad: " + ex.Message);
+            }
+        }
     }
 }
