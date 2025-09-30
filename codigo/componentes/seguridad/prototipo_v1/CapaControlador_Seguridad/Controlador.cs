@@ -22,5 +22,11 @@ namespace CapaControlador_Seguridad
         {
             sn.InsertarBitacora(iIdUsuario, iIdAplicacion, sAccion, bEstado);
         }
+
+        public void insertarFacultad(string codigo_facultad, string nombre_facultad, string status_facultad)
+        {
+            Sentencias.InsertarFacultades(codigo_facultad, nombre_facultad, status_facultad);
+        }
+
     }
 }

@@ -33,8 +33,8 @@ namespace CapaVista_Menu
             this.catalogosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaBitacoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.identificacionAlumnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +56,7 @@ namespace CapaVista_Menu
             this.catalogosToolStripMenuItem.Name = "catalogosToolStripMenuItem";
             this.catalogosToolStripMenuItem.Size = new System.Drawing.Size(90, 24);
             this.catalogosToolStripMenuItem.Text = "Catalogos";
+            this.catalogosToolStripMenuItem.Click += new System.EventHandler(this.catalogosToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -73,18 +74,18 @@ namespace CapaVista_Menu
             this.consultaBitacoraToolStripMenuItem.Text = "Consulta Bitacora";
             this.consultaBitacoraToolStripMenuItem.Click += new System.EventHandler(this.consultaBitacoraToolStripMenuItem_Click);
             // 
+            // identificacionAlumnoToolStripMenuItem
+            // 
+            this.identificacionAlumnoToolStripMenuItem.Name = "identificacionAlumnoToolStripMenuItem";
+            this.identificacionAlumnoToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.identificacionAlumnoToolStripMenuItem.Text = "Identificacion Alumno";
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // identificacionAlumnoToolStripMenuItem
-            // 
-            this.identificacionAlumnoToolStripMenuItem.Name = "identificacionAlumnoToolStripMenuItem";
-            this.identificacionAlumnoToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.identificacionAlumnoToolStripMenuItem.Text = "Identificacion Alumno";
             // 
             // MenuGeneral
             // 
